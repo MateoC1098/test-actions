@@ -1,7 +1,7 @@
 from unittest import TestCase, mock
 from faker import Faker
-from src.models.publicacion import Publicacion
-from src.commands.consultar_publicacion import ConsultarPublicacion
+from ...src.models.publicacion import Publicacion
+from ...src.commands.consultar_publicacion import ConsultarPublicacion
 
 class TestConsultarPublicacion(TestCase):
     def setUp(self):

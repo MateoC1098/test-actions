@@ -33,7 +33,7 @@ jobs:
     - name: Cálculo de cubrimiento
       id: cubrimiento
       run: |
-          coverage run -m unittest tests/test_*.py
+          coverage run -m unittest post-management/tests/test_*.py
           coverage report -m
     - name: Check coverage
       run: |

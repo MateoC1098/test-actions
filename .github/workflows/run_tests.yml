@@ -27,7 +27,7 @@ jobs:
     - name: Install dependencies
       run: |
         cd post-management
-        pipenv install
+        pipenv install --deploy --system --ignore-pipfile
     - name: Correr pruebas
       id: correr-pruebas-post-management
       run: python -m unittest -v post-management/tests/*/test_*.py

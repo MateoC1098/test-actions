@@ -1,8 +1,7 @@
 from unittest import TestCase, mock
 from faker import Faker
-from src.blueprints import views
-from src.main import app
-from src.models.publicacion import Publicacion
+from ...src.main import app
+from ...src.models.publicacion import Publicacion
 from datetime import timedelta, datetime
 
 

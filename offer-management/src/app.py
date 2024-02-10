@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 from .blueprints.views import views
 from .errors.errors import ApiError
-import os
+import os 
 
 from .models.offer import db
  

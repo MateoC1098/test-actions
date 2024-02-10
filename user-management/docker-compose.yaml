@@ -1,0 +1,142 @@
+version: '3.9'
+services:
+  usuariosdb:
+    image: postgres:latest
+    container_name: postgres-usersdb
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=users
+      - TZ=UTC
+    ports:
+      - "5434:5432"
+    restart: on-failure
+    networks:
+      - user_net
+  
+  users-app:
+    image: orsolarte/cloudnativesoft:users-0.1
+    container_name: users
+    ports:
+       - '3000:3000'
+    depends_on:
+      - usuariosdb
+    restart: on-failure
+    environment:
+      - TZ=UTC
+      - DB_HOST=postgres-usersdb
+      - DB_USER=postgres
+      - DB_PASSWORD=root
+      - DB_NAME=users
+      - DB_PORT=5432
+    networks:
+      - user_net
+      - app_net
+
+  postsdb:
+    image: postgres:latest
+    container_name: postgres-postsdb
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=posts
+      - TZ=UTC
+    ports:
+      - "5433:5432"
+    restart: on-failure
+    networks:
+      - post_net
+  
+  post-app:
+    image: zenseit/post-management
+    container_name: posts
+    ports:
+       - '3001:5000'
+    depends_on:
+      - postsdb
+    restart: on-failure
+    environment:
+      - TZ=UTC
+      - DB_HOST=postgres-postsdb
+      - DB_USER=postgres
+      - DB_PASSWORD=root
+      - DB_NAME=posts
+      - DB_PORT=5432
+      - USERS_PATH=http://users-app:3000
+    networks:
+      - post_net      
+      - app_net
+ 
+  offersdb:
+      image: postgres:latest
+      container_name: postgres-offers
+      environment:
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=test
+        - POSTGRES_DB=ofertas
+        - TZ=UTC
+      ports:
+        - "5436:5432"
+      restart: on-failure
+      networks:
+        - offers_net
+  offers-app:
+    image: zenseit/offers-management
+    container_name: offers
+    ports:
+       - '3003:5000'
+    depends_on:
+      - offersdb
+    restart: on-failure
+    environment:
+      - TZ=UTC
+      - DB_HOST=postgres-offers
+      - DB_USER=postgres
+      - DB_PASSWORD=test
+      - DB_NAME=ofertas
+      - DB_PORT=5432
+      - USERS_PATH=http://users-app:3000
+    networks:
+      - offers_net 
+      - app_net
+
+  routedb:
+      image: postgres:latest
+      container_name: routedb
+      environment:
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
+        - POSTGRES_DB=routs
+        - TZ=UTC
+      ports:
+        - "5435:5432"
+      restart: on-failure
+      networks:
+        - route_net
+  route-app:
+    image: routemanagement
+    container_name: routes
+    ports:
+       - '3002:5000'
+    depends_on:
+      - routedb
+    restart: on-failure
+    environment:
+      - TZ=UTC
+      - DB_HOST=routedb
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=routs
+      - DB_PORT=5432
+      - USERS_PATH=http://users-app:3000
+    networks:
+      - route_net 
+      - app_net      
+
+networks:
+  app_net:
+  user_net:
+  post_net:
+  offers_net:
+  route_net:
+  

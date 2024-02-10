@@ -1,0 +1,9 @@
+**/__pycache__
+**/.pytest_cache
+test/
+*.md
+Dockerfile
+docker-compose.yaml
+compile_files.py
+.env.development
+.env.test

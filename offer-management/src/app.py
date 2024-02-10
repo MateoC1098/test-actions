@@ -4,7 +4,7 @@ from .errors.errors import ApiError
 import os
 
 from .models.offer import db
-
+ 
 def create_app(test_config=None):
     app = Flask(__name__)
     

@@ -30,6 +30,8 @@ jobs:
         python -m unittest -v tests/*/test_*.py
         coverage run -m unittest tests/*/test_*.py
         coverage report -m
+        echo "Coverage variable: $coverage"
+      
     - name: Check coverage
       run: |
         coverage=$(coverage report -m | grep TOTAL | awk '{print $NF}' | tr -d '%')

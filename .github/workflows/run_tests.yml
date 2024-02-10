@@ -30,6 +30,8 @@ jobs:
         python -m unittest -v tests/*/test_*.py
         coverage run -m unittest tests/*/test_*.py
         coverage report -m
+        cov_score=$(awk '$1 == "TOTAL" {print $NF+0}' .coverage)
+        
     - name: Check coverage
       run: |
         coverage=$(coverage report -m | grep TOTAL | awk '{print $NF}' | tr -d '%')

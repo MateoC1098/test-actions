@@ -1,0 +1,21 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "users"
+
+[packages]
+wheel = "*"
+flask = "*"
+marshmallow = "*"
+python-abc = "*"
+python-dotenv = "*"
+flask-sqlalchemy = "*"
+psycopg2-binary = "*"
+gunicorn="*"
+
+[dev-packages]
+pytest = "*"
+pytest-cov = "*"
+pytest-mock = "*"
+pytest-env = "*"
+flask-testing = "*"

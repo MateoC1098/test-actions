@@ -1,14 +1,14 @@
 import pytest
-from src.app import app as _app, db
+from src.app import create_app, db
 from unittest.mock import MagicMock
 import uuid
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="session")
 def app():
-    app = _app
-    app.config["TESTING"] = True
-    with app.app_context():
-        yield app
+    app = create_app({
+        "TESTING": True,
+    })
+    yield app
 
 @pytest.fixture
 def setup_db(mocker):

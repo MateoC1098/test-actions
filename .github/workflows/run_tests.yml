@@ -30,11 +30,11 @@ jobs:
         pipenv install --deploy --system --ignore-pipfile
     - name: Correr pruebas
       id: correr-pruebas-post-management
-      run: python -m unittest -v post-management/tests/*/test_*.py
+      run: python -m unittest -v tests/*/test_*.py
     - name: Cálculo de cubrimiento
       id: cubrimiento
       run: |
-          coverage run -m unittest post-management/tests/*/test_*.py
+          coverage run -m unittest tests/*/test_*.py
           coverage report -m
     - name: Check coverage
       run: |

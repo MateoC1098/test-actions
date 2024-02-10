@@ -1,14 +1,18 @@
 from unittest import TestCase, mock
 from faker import Faker
-from ...src.main import app
-from ...src.models.publicacion import Publicacion
+from src import create_app, set_views, set_app_context
+from src.models.publicacion import Publicacion
+from src.blueprints.views import views
 from datetime import timedelta, datetime
 
 
 class TestEndpoints(TestCase):
     
         def setUp(self):
-            self.app = app.test_client()
+            self.app = create_app('config/testing.py')
+            set_views(self.app,views)
+            set_app_context(self.app)
+            self.app = self.app.test_client()
             self.fake = Faker()
             now_date = datetime.now() + timedelta(days=1)
             self.publicacion = Publicacion(routeId=self.fake.uuid4(), userId=self.fake.uuid4(), expireAt=self.fake.date_between_dates(date_start=now_date, date_end=now_date + timedelta(days=3)))

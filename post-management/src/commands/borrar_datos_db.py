@@ -6,3 +6,5 @@ class LimpiarBaseDeDatos():
 
     def execute(self):
         return self.repository.cleanDatabase()
+    
+    

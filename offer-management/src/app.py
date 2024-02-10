@@ -11,7 +11,7 @@ def create_app(test_config=None):
     if test_config is None:
         app.config.from_pyfile('config/config.py')
         db.init_app(app)
-        
+         
     else:
         app.config.update(test_config)
         

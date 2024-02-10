@@ -13,7 +13,7 @@ except:
 app.register_blueprint(views)
 
 
-app.register_blueprint(views, name="my_views")
+#app.register_blueprint(views, name="my_views")
 
 app_context = app.app_context()
 app_context.push()

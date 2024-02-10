@@ -83,7 +83,6 @@ jobs:
       working-directory: offer-management
       run: pipenv run pytest --cov=src -v -s --cov-fail-under=70
 
-
   merge-to-main:
     needs: [test_post_microservice, test_user_microservice]
     runs-on: ubuntu-latest

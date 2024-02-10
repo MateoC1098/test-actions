@@ -1,24 +1,11 @@
-from flask import Flask
+from src import create_app, set_views, set_app_context, set_db
 from .blueprints.views import views
 
-from .models.publicacion import db
-
-app = Flask(__name__)
-
-try:
-    app.config.from_pyfile('config/config.py')
-except:
-    pass
-
-app.register_blueprint(views)
-
-app_context = app.app_context()
-app_context.push()
+app = create_app('config/config.py')
 
 
-db.init_app(app)
-db.create_all()
-print("Conexión a la base de datos establecida correctamente.")
-
+set_views(app,views)
+set_app_context(app)
+set_db(app)
 
 
